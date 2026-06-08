@@ -15,12 +15,21 @@ export const EntirePlugin: Plugin = async ({ directory }) => {
   // In-memory store for message metadata (role, tokens, etc.)
   const messageStore = new Map<string, any>()
 
+  const isWin = process.platform === "win32"
+
   /**
    * Build the shell command for a hook invocation.
    * Uses sh -c so that shell command substitution in ENTIRE_CMD
    * (e.g., $(git rev-parse --show-toplevel) for local-dev) is interpreted.
+   * On Windows, falls back to cmd.exe /c since sh is not available.
    */
   function hookCmd(hookName: string): string[] {
+    if (isWin) {
+      if (ENTIRE_CMD !== "entire") {
+        return ["cmd.exe", "/c", `${ENTIRE_CMD} hooks opencode ${hookName}`]
+      }
+      return ["entire", "hooks", "opencode", hookName]
+    }
     if (ENTIRE_CMD !== "entire") {
       return ["sh", "-c", `${ENTIRE_CMD} hooks opencode ${hookName}`]
     }
