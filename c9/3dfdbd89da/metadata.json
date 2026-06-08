@@ -1,0 +1,56 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "c93dfdbd89da",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".gitignore",
+    "README.md",
+    "jsconfig.json",
+    "next.config.mjs",
+    "package-lock.json",
+    "package.json",
+    "postcss.config.mjs",
+    "src/actions/auth.js",
+    "src/actions/bookmarks.js",
+    "src/app/[handle]/page.js",
+    "src/app/api/send-welcome-email/route.js",
+    "src/app/dashboard/content.jsx",
+    "src/app/dashboard/page.js",
+    "src/app/globals.css",
+    "src/app/layout.js",
+    "src/app/login/page.js",
+    "src/app/page.js",
+    "src/app/signup/page.js",
+    "src/components/bookmark-form.jsx",
+    "src/components/bookmark-list.jsx",
+    "src/components/header.jsx",
+    "src/components/ui/button.jsx",
+    "src/components/ui/card.jsx",
+    "src/components/ui/input.jsx",
+    "src/components/ui/label.jsx",
+    "src/components/ui/switch.jsx",
+    "src/lib/supabase.js",
+    "src/lib/utils.js",
+    "src/proxy.js",
+    "src/services/email.js",
+    "src/validations/schemas.js",
+    "supabase/schema.sql"
+  ],
+  "sessions": [
+    {
+      "metadata": "/c9/3dfdbd89da/0/metadata.json",
+      "transcript": "/c9/3dfdbd89da/0/full.jsonl",
+      "content_hash": "/c9/3dfdbd89da/0/content_hash.txt",
+      "prompt": "/c9/3dfdbd89da/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 28712,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1435520,
+    "output_tokens": 22653,
+    "api_call_count": 45
+  }
+}

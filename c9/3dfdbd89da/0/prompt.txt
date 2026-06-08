@@ -1,0 +1,447 @@
+# Build a Complete Bookmarks Application
+
+You are a senior full-stack engineer.
+
+Build a complete production-ready application that exactly matches the requirements below.
+
+## Tech Stack (Mandatory)
+
+Use ONLY:
+
+* Next.js 16 (App Router)
+* JavaScript (NO TypeScript)
+* Tailwind CSS
+* shadcn/ui
+* React Hook Form
+* Zod
+* Supabase (Authentication + Database)
+* Resend (Email sending)
+* Vercel deployment
+
+Do not use unnecessary libraries.
+
+Follow:
+
+* DRY principles
+* Clean architecture
+* Simple folder structure
+* Maintainable code
+* Readable code
+* No over-engineering
+* No premature abstractions
+* No unnecessary design patterns
+* No Redux
+* No Context unless truly required
+* No complicated state management
+
+The project should feel like something a small startup would actually build.
+
+---
+
+# Application Overview
+
+A small personal bookmarks application.
+
+Think:
+
+* Linktree
+* Pocket
+
+combined in a minimal way.
+
+---
+
+# Core Features
+
+## Authentication
+
+Users can:
+
+* Sign Up
+* Login
+* Logout
+
+Authentication must use Supabase Auth.
+
+Required fields:
+
+* Email
+* Password
+
+On successful signup:
+
+* Create user profile record
+* Send welcome email using Resend
+
+Do not fake email sending.
+
+Implement actual Resend integration.
+
+Store credentials using environment variables.
+
+---
+
+# User Profile
+
+Every user has:
+
+* id
+* email
+* handle
+* created_at
+
+Handle requirements:
+
+* unique
+* required
+* lowercase
+* URL friendly
+
+Examples:
+
+* @yash
+* @johnsmith
+
+Public profile URL:
+
+/[handle]
+
+Examples:
+
+/yash
+/johnsmith
+
+Two users must never be able to have the same handle.
+
+Enforce uniqueness in database.
+
+---
+
+# Bookmarks
+
+A bookmark contains:
+
+* id
+* user_id
+* title
+* url
+* is_public
+* created_at
+* updated_at
+
+Users can:
+
+* Create bookmark
+* Edit bookmark
+* Delete bookmark
+
+Fields:
+
+* Title
+* URL
+* Public / Private toggle
+
+Validate URL properly.
+
+---
+
+# Dashboard
+
+After login:
+
+Redirect to:
+
+/dashboard
+
+Dashboard displays:
+
+* User info
+* Handle
+* List of bookmarks
+
+User can:
+
+* Add bookmark
+* Edit bookmark
+* Delete bookmark
+
+Simple and clean UI.
+
+No unnecessary filters.
+
+No unnecessary animations.
+
+No drag and drop.
+
+---
+
+# Privacy Requirements (Very Important)
+
+Treat security as a real requirement.
+
+Users must never be able to:
+
+* Read another user's bookmarks
+* Edit another user's bookmarks
+* Delete another user's bookmarks
+
+Assume users can:
+
+* Change URLs
+* Modify requests
+* Call APIs directly
+
+Security must be enforced at:
+
+1. Database level
+2. API level
+3. UI level
+
+Use Supabase Row Level Security (RLS).
+
+Implement proper policies.
+
+A user should only access records where:
+
+bookmarks.user_id = auth.uid()
+
+Do not rely only on frontend checks.
+
+---
+
+# Public Profile Page
+
+Route:
+
+/[handle]
+
+Requirements:
+
+Accessible without login.
+
+Shows:
+
+* User handle
+* Public bookmarks only
+
+Never expose private bookmarks.
+
+If user has:
+
+* 10 bookmarks
+* 4 public
+* 6 private
+
+Visitors must only see the 4 public bookmarks.
+
+---
+
+# Database Design
+
+Create SQL schema for:
+
+## profiles
+
+* id
+* email
+* handle
+* created_at
+
+## bookmarks
+
+* id
+* user_id
+* title
+* url
+* is_public
+* created_at
+* updated_at
+
+Include:
+
+* Foreign keys
+* Indexes
+* Constraints
+* Unique handle constraint
+* RLS policies
+
+Generate complete SQL.
+
+---
+
+# Authentication Flow
+
+Signup:
+
+1. User enters email
+2. User enters password
+3. User enters handle
+4. Create account
+5. Create profile
+6. Send welcome email
+7. Redirect to dashboard
+
+Login:
+
+1. Email
+2. Password
+3. Redirect dashboard
+
+Logout:
+
+1. Clear session
+2. Redirect login
+
+---
+
+# Email Integration
+
+Use Resend.
+
+Create:
+
+/api/send-welcome-email
+
+Send:
+
+Subject:
+Welcome to Bookmarks
+
+Email should include:
+
+* Greeting
+* User handle
+* Dashboard link
+
+Use environment variables.
+
+---
+
+# UI Requirements
+
+Use:
+
+* shadcn/ui components
+* Tailwind
+
+Pages:
+
+## Public
+
+* /
+* /login
+* /signup
+* /[handle]
+
+## Protected
+
+* /dashboard
+
+UI should be:
+
+* Clean
+* Modern
+* Responsive
+* Minimal
+
+No fancy effects.
+
+No unnecessary gradients.
+
+Focus on usability.
+
+---
+
+# Form Handling
+
+Use:
+
+* React Hook Form
+* Zod validation
+
+Validation:
+
+Signup:
+
+* email
+* password
+* handle
+
+Bookmark:
+
+* title
+* valid URL
+
+Show user-friendly errors.
+
+---
+
+# Project Structure
+
+Use a simple scalable structure.
+
+Example:
+
+src/
+├── app/
+├── components/
+├── actions/
+├── lib/
+├── validations/
+├── services/
+├── hooks/
+
+Keep structure easy to understand.
+
+Do not create folders that only contain one file.
+
+---
+
+# Environment Variables
+
+Create .env.example containing:
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+RESEND_API_KEY=
+NEXT_PUBLIC_APP_URL=
+
+---
+
+# Deployment
+
+Provide:
+
+1. Supabase setup steps
+2. Resend setup steps
+3. Vercel setup steps
+4. Environment variable configuration
+5. Database migration instructions
+
+Application must be deployable immediately after adding credentials.
+
+---
+
+# Expected Output
+
+Generate:
+
+1. Complete folder structure
+2. All source code files
+3. SQL schema
+4. RLS policies
+5. Supabase configuration
+6. Resend integration
+7. Authentication implementation
+8. Dashboard implementation
+9. Public profile implementation
+10. Deployment instructions
+
+Do not skip files.
+
+Do not use placeholders.
+
+Generate production-ready code.
+
+The final application should work exactly as specified and be deployable to Vercel.
