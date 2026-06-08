@@ -1,0 +1,29 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "201019d75a19",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    ".env.example",
+    "README.md",
+    "src/actions/auth.js",
+    "src/lib/supabase.js",
+    "supabase/schema.sql"
+  ],
+  "sessions": [
+    {
+      "metadata": "/20/1019d75a19/0/metadata.json",
+      "transcript": "/20/1019d75a19/0/full.jsonl",
+      "content_hash": "/20/1019d75a19/0/content_hash.txt",
+      "prompt": "/20/1019d75a19/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 8047,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1529216,
+    "output_tokens": 6245,
+    "api_call_count": 22
+  }
+}

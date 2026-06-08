@@ -1,0 +1,23 @@
+Runtime TypeError
+Server
+
+
+
+undefined is not iterable
+src\actions\auth.js (12:12) @ signup
+
+
+  10 | export async function signup(formData) {
+  11 |   const validated = signupSchema.safeParse(
+> 12 |     Object.fromEntries(formData)
+     |            ^
+  13 |   );
+  14 |
+  15 |   if (!validated.success) {
+Call Stack
+8
+
+Show 6 ignore-listed frame(s)
+Object.fromEntries
+<anonymous>
+signup

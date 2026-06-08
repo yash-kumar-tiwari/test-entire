@@ -1,0 +1,73 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "201019d75a19",
+  "session_id": "ses_158794e78ffeePaLljK0pXYBtC",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-08T16:54:41.0673911Z",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    ".env.example",
+    "README.md",
+    "src/actions/auth.js",
+    "src/lib/supabase.js",
+    "supabase/schema.sql"
+  ],
+  "agent": "OpenCode",
+  "model": "big-pickle",
+  "turn_id": "a82a9b0f7c87",
+  "checkpoint_transcript_start": 46,
+  "transcript_lines_at_start": 46,
+  "token_usage": {
+    "input_tokens": 8047,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1529216,
+    "output_tokens": 6245,
+    "api_call_count": 22
+  },
+  "session_metrics": {
+    "turn_count": 5
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-08T16:54:40.6910263Z",
+    "agent_lines": 123,
+    "agent_removed": 40,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 123,
+    "total_lines_changed": 163,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 23,
+      "agent_lines_removed": 8
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 23,
+      "agent_lines_removed": 8
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 85,
+      "agent_lines_removed": 39
+    }
+  ]
+}
