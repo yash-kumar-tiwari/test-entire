@@ -1,3 +1,105 @@
+# Bookmarks
+
+A personal bookmarks application built with Next.js 16, Supabase, and Resend.
+
+## Stack
+
+- Next.js 16 (App Router)
+- JavaScript
+- Tailwind CSS + shadcn/ui
+- React Hook Form + Zod
+- Supabase (Auth + Database)
+- Resend (Email)
+
+## Setup
+
+### 1. Supabase
+
+1. Create a project at [supabase.com](https://supabase.com)
+2. Go to **SQL Editor** and run the migration in `supabase/schema.sql`
+3. Go to **Project Settings > API** and copy:
+   - `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`
+   - `anon public key` → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `service_role key` → `SUPABASE_SERVICE_ROLE_KEY`
+4. Go to **Authentication > Settings** and disable **Confirm email** if you want immediate signups (or keep it enabled)
+
+### 2. Resend
+
+1. Create an account at [resend.com](https://resend.com)
+2. Add and verify a domain (or use the sandbox `onboarding@resend.dev` for testing)
+3. Create an API key → `RESEND_API_KEY`
+
+### 3. Environment Variables
+
+Copy `.env.example` to `.env.local`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+RESEND_API_KEY=
+NEXT_PUBLIC_APP_URL=
+```
+
+### 4. Install & Run
+
+```bash
+npm install
+npm run dev
+```
+
+### 5. Vercel Deployment
+
+1. Push to a Git repository
+2. Import project on [vercel.com](https://vercel.com)
+3. Add all environment variables
+4. Deploy
+
+---
+
+## Features
+
+- **Authentication** — Sign up, log in, log out via Supabase Auth
+- **Bookmarks** — Create, edit, delete bookmarks with public/private toggle
+- **Public Profile** — Share your public bookmarks at `/[handle]`
+- **Email** — Welcome email via Resend on signup
+- **Security** — Supabase RLS ensures users can only access their own data
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── [handle]/page.js     # Public profile page
+│   ├── api/                  # API routes
+│   ├── dashboard/            # Protected dashboard
+│   ├── login/                # Login page
+│   ├── signup/               # Signup page
+│   ├── layout.js             # Root layout
+│   ├── page.js               # Landing page
+│   └── globals.css           # Tailwind styles
+├── actions/
+│   ├── auth.js               # Signup, login, logout server actions
+│   └── bookmarks.js          # CRUD server actions
+├── components/
+│   ├── ui/                   # shadcn/ui components
+│   ├── bookmark-form.jsx     # Bookmark create/edit form
+│   ├── bookmark-list.jsx     # Bookmark display list
+│   └── header.jsx            # Dashboard header
+├── lib/
+│   ├── supabase.js           # Supabase client factory
+│   └── utils.js              # cn() utility
+├── services/
+│   └── email.js              # Resend email service
+├── validations/
+│   └── schemas.js            # Zod schemas
+└── proxy.js                  # Auth middleware
+```
+
+---
+
+*Existing content below preserved from original setup.*
+
 # Entire Checkpoint Session Record
 
 Checking Entire checkpoint and session recording for this repository.
