@@ -20,8 +20,7 @@ A personal bookmarks application built with Next.js 16, Supabase, and Resend.
 3. Go to **Project Settings > API** and copy:
    - `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`
    - `anon public key` → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `service_role key` → `SUPABASE_SERVICE_ROLE_KEY`
-4. Go to **Authentication > Settings** and disable **Confirm email** if you want immediate signups (or keep it enabled)
+4. Go to **Authentication > Settings** and disable **Confirm email** for immediate signups (recommended)
 
 ### 2. Resend
 
@@ -36,7 +35,6 @@ Copy `.env.example` to `.env.local`:
 ```
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
 RESEND_API_KEY=
 NEXT_PUBLIC_APP_URL=
 ```

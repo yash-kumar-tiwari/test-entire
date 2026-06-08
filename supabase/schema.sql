@@ -77,3 +77,24 @@ DROP POLICY IF EXISTS "Users can delete their own bookmarks" ON bookmarks;
 CREATE POLICY "Users can delete their own bookmarks" ON bookmarks
   FOR DELETE
   USING (user_id = auth.uid());
+
+-- Function to create a profile (bypasses RLS via security definer)
+-- Used during signup before the user has a session
+CREATE OR REPLACE FUNCTION create_profile(
+  user_id UUID,
+  user_email TEXT,
+  user_handle TEXT
+)
+RETURNS VOID
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  INSERT INTO profiles (id, email, handle)
+  VALUES (user_id, user_email, user_handle);
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION create_profile TO anon;
+GRANT EXECUTE ON FUNCTION create_profile TO authenticated;
