@@ -1,0 +1,1 @@
+checking entire checkpoint session record
