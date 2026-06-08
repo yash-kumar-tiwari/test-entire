@@ -31,3 +31,14 @@ type .entire\logs\entire.log
 ```bash
 entire status && entire session list && entire checkpoint list
 ```
+
+## Session Recording Active
+
+Session recording via Entire is configured. After restarting OpenCode, sessions and checkpoints will appear automatically. Verify with:
+
+```powershell
+entire session list        # Shows active/idle/ended sessions
+entire checkpoint list     # Shows checkpoints per commit
+entire activity            # Shows throughput and contribution data
+entire doctor              # Confirms no stuck sessions
+```
