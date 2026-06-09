@@ -47,7 +47,7 @@ export function BookmarkForm({ action, defaultValues = {}, onDone }) {
     if (result?.error) {
       setServerError(result.error._form?.[0] || "Something went wrong");
       setPending(false);
-    } else if (!defaultValues.id) {
+    } else {
       onDone?.();
     }
   }

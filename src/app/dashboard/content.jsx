@@ -1,16 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { BookmarkForm } from "@/components/bookmark-form";
 import { BookmarkList } from "@/components/bookmark-list";
-import { createBookmark, updateBookmark, deleteBookmark } from "@/actions/bookmarks";
+import {
+  createBookmark,
+  updateBookmark,
+  deleteBookmark,
+} from "@/actions/bookmarks";
 
-export function DashboardContent({ email, handle, bookmarks: initialBookmarks }) {
+export function DashboardContent({
+  email,
+  handle,
+  bookmarks: initialBookmarks,
+}) {
   const router = useRouter();
   const [bookmarks, setBookmarks] = useState(initialBookmarks);
   const [editingBookmark, setEditingBookmark] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const prevBookmarks = useRef(initialBookmarks);
+
+  // Sync local state when server sends fresh data after mutations
+  useEffect(() => {
+    if (prevBookmarks.current !== initialBookmarks) {
+      setBookmarks(initialBookmarks);
+      prevBookmarks.current = initialBookmarks;
+    }
+  }, [initialBookmarks]);
 
   async function handleDelete(formData) {
     const result = await deleteBookmark(formData);
@@ -20,23 +37,10 @@ export function DashboardContent({ email, handle, bookmarks: initialBookmarks })
     }
   }
 
-  async function handleUpdate(formData) {
-    const result = await updateBookmark(formData);
-    if (!result?.error) {
-      setEditingBookmark(null);
-      setShowForm(false);
-      router.refresh();
-    }
-    return result;
-  }
-
-  async function handleCreate(formData) {
-    const result = await createBookmark(formData);
-    if (!result?.error) {
-      setShowForm(false);
-      router.refresh();
-    }
-    return result;
+  function done() {
+    setEditingBookmark(null);
+    setShowForm(false);
+    router.refresh();
   }
 
   function handleEdit(bookmark) {
@@ -59,13 +63,9 @@ export function DashboardContent({ email, handle, bookmarks: initialBookmarks })
             {editingBookmark ? "Edit bookmark" : "Add bookmark"}
           </h2>
           <BookmarkForm
-            action={editingBookmark ? handleUpdate : handleCreate}
+            action={editingBookmark ? updateBookmark : createBookmark}
             defaultValues={editingBookmark || {}}
-            onDone={() => {
-              setEditingBookmark(null);
-              setShowForm(false);
-              router.refresh();
-            }}
+            onDone={done}
           />
         </div>
       ) : (
@@ -74,7 +74,7 @@ export function DashboardContent({ email, handle, bookmarks: initialBookmarks })
             setEditingBookmark(null);
             setShowForm(true);
           }}
-          className="mb-6 inline-flex items-center justify-center rounded-md border border-dashed px-4 py-2 text-sm font-medium hover:bg-accent cursor-pointer"
+          className="mb-6 inline-flex cursor-pointer items-center justify-center rounded-md border border-dashed px-4 py-2 text-sm font-medium hover:bg-accent"
         >
           + Add bookmark
         </button>

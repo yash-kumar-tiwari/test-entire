@@ -16,11 +16,37 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  const { data: profile } = await supabase
+  // Check if profile exists — auto-create if missing
+  let { data: profile } = await supabase
     .from("profiles")
     .select("handle")
     .eq("id", user.id)
     .single();
+
+  if (!profile) {
+    const base = user.email
+      .split("@")[0]
+      .replace(/[^a-z0-9_]/gi, "_")
+      .toLowerCase()
+      .slice(0, 20);
+    const suffix = Math.random().toString(36).slice(2, 6);
+    const handle = `${base}_${suffix}`;
+
+    await supabase.rpc("create_profile", {
+      user_id: user.id,
+      user_email: user.email,
+      user_handle: handle,
+    });
+
+    // Re-fetch after creation
+    const { data: newProfile } = await supabase
+      .from("profiles")
+      .select("handle")
+      .eq("id", user.id)
+      .single();
+
+    profile = newProfile;
+  }
 
   const { data: bookmarks } = await supabase
     .from("bookmarks")

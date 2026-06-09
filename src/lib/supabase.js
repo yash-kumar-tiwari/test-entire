@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { createBrowserClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 
 export function createClient(cookieStore) {
   return createServerClient(
@@ -8,14 +7,13 @@ export function createClient(cookieStore) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        async getAll() {
-          const store = await cookieStore;
-          return store.getAll();
+        getAll() {
+          return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => {
             try {
-              store.set(name, value, options);
+              cookieStore.set(name, value, options);
             } catch {
               // Ignore in middleware/RSC
             }
