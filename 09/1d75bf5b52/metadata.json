@@ -1,0 +1,31 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "091d75bf5b52",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 7,
+  "files_touched": [
+    ".env.example",
+    "src/actions/bookmarks.js",
+    "src/app/api/setup/route.js",
+    "src/app/dashboard/content.jsx",
+    "src/app/dashboard/page.js",
+    "src/components/bookmark-form.jsx",
+    "src/lib/supabase.js"
+  ],
+  "sessions": [
+    {
+      "metadata": "/09/1d75bf5b52/0/metadata.json",
+      "transcript": "/09/1d75bf5b52/0/full.jsonl",
+      "content_hash": "/09/1d75bf5b52/0/content_hash.txt",
+      "prompt": "/09/1d75bf5b52/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 13966,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 3959424,
+    "output_tokens": 9468,
+    "api_call_count": 36
+  }
+}

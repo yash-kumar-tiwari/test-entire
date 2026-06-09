@@ -1,0 +1,1 @@
+after successful login dashboard appear only in url but no content is showing so as per requirement bookmarks should show and add edit delete option should be their
